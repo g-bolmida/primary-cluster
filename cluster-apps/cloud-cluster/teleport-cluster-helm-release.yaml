@@ -16,8 +16,8 @@ spec:
   interval: 1h0m0s
   releaseName: teleport-cluster
   targetNamespace: teleport-cluster
-values:
-  clusterName: "teleport.georgebolmida.com"
-  kubeClusterName: "microk8s-cloud"
-  acme: true
-  acmeEmail: "gbolmida@georgebolmida.com"
+  values:
+    clusterName: "teleport.georgebolmida.com"
+    kubeClusterName: "microk8s-cloud"
+    acme: true
+    acmeEmail: "gbolmida@georgebolmida.com"
