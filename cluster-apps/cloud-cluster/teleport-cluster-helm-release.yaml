@@ -1,0 +1,23 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: teleport-cluster
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: teleport-cluster
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: teleport-repo
+      version: '>=10.0.0-dev'
+  interval: 1h0m0s
+  releaseName: teleport-cluster
+  targetNamespace: teleport-cluster
+values:
+  clusterName: "teleport.georgebolmida.com"
+  kubeClusterName: "microk8s-cloud"
+  acme: true
+  acmeEmail: "gbolmida@georgebolmida.com"
