@@ -1,0 +1,43 @@
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Alert
+metadata:
+  name: cluster-info
+  namespace: flux-system
+spec:
+  providerRef:
+    name: discord-alerts
+  eventSeverity: info
+  eventSources:
+    - kind: GitRepository
+      name: "*"
+    - kind: Kustomization
+      name: "*"
+    - kind: HelmRepository
+      name: "*"
+    - kind: HelmRelease
+      name: "*"
+  suspend: false
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Alert
+metadata:
+  name: cluster-alerts
+  namespace: flux-system
+spec:
+  providerRef:
+    name: discord-alerts
+  eventSeverity: error
+  eventSources:
+    - kind: GitRepository
+      name: "*"
+    - kind: Kustomization
+      name: "*"
+    - kind: HelmRepository
+      name: "*"
+    - kind: HelmRelease
+      name: "*"
+  exclusionList:
+    - "error.*lookup github\\.com"
+    - "waiting.*socket"
+  suspend: false
