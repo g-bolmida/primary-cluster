@@ -20,3 +20,5 @@ spec:
   targetNamespace: cert-manager
   upgrade:
     crds: CreateReplace
+  values:
+    installCRDs: true
