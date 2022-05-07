@@ -24,3 +24,5 @@ spec:
     kubeClusterName: "microk8s-cloud"
     acme: true
     acmeEmail: "gbolmida@georgebolmida.com"
+    service:
+      type: ClusterIP
