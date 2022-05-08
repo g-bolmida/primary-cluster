@@ -5,6 +5,9 @@ metadata:
   name: cert-manager
   namespace: flux-system
 spec:
+  install:
+    remediation:
+      retries: -1
   chart:
     spec:
       chart: cert-manager
@@ -13,8 +16,6 @@ spec:
         kind: HelmRepository
         name: jetstack
       version: '>=v1.8.0'
-  install:
-    crds: Create
   interval: 1h0m0s
   releaseName: cert-manager
   targetNamespace: cert-manager
