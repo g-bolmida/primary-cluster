@@ -1,0 +1,44 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: gitea
+  namespace: flux-system
+spec:
+  install:
+    remediation:
+      retries: -1
+  chart:
+    spec:
+      chart: gitea
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: gitea-charts
+      version: '>=1.15'
+  interval: 1h0m0s
+  releaseName: gitea
+  targetNamespace: gitea
+  upgrade:
+    crds: CreateReplace
+  values:
+    ingress:
+      enabled: true
+      className: public
+      annotations: 
+        kubernetes.io/ingress.class: nginx
+        kubernetes.io/tls-acme: "true"
+      hosts:
+        - host: git.georgebolmida.com
+          paths:
+            - path: /
+              pathType: Prefix
+    persistence:
+      enabled: true
+      size: 10Gi
+      accessModes:
+        - ReadWriteOnce
+      storageClass: microk8s-hostpath
+    gitea:
+      admin:
+        existingSecret: gitea-admin
